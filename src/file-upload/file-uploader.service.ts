@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 import { of } from 'rxjs/observable/of';
 import { FileItem } from './file-item.class';
 import { FileUploader, FileUploaderOptions } from './file-uploader.class';
+import { Injectable } from '@angular/core';
 
 export interface UploaderLinksOptions {
 	downloadEntry: string;
@@ -32,7 +33,7 @@ export interface UploaderServiceOptions {
 	idAttribute?: string;
 }
 
-
+@Injectable()
 export class FileUploaderService {
 	public defaultLinks: UploaderLinksOptions = {
 		downloadEntry: '',

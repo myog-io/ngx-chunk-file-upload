@@ -5,17 +5,42 @@ import { By } from '@angular/platform-browser';
 import { FileUploadModule } from '../file-upload/file-upload.module';
 import { FileSelectDirective } from '../file-upload/file-select.directive';
 import { FileUploader } from '../file-upload/file-uploader.class';
+import { FileUploaderService } from '../file-upload/file-uploader.service';
 
 @Component({
 	selector: 'ngx-container',
 	template: `<input type="file"
                     ngxFileSelect
                     [uploader]="uploader"
-             />`
+             />`,
 })
 export class ContainerComponent {
 	public get url(): string { return 'localhost:3000'; }
-	public uploader: FileUploader = new FileUploader({ url: this.url });
+	public uploader: FileUploader;
+	constructor(uploaderService: FileUploaderService) {
+		uploaderService.defaultLinks = {
+			downloadEntry: this.url,
+			updateEntry: this.url,
+			createEntry: this.url,
+			deleteEntry: 'this.url',
+		};
+		uploaderService.defaultOptions = {
+			createMethod: 'POST',
+			updateMethod: 'POST',
+			authorizationHeaderName: 'Authorization',
+			tokenPattern: null,
+			token: null,
+			chunkSize: 0,
+			totalChunkParamName: 'total_chunks',
+			currentChunkParamName: 'current_chunk',
+			contentTypeParamName: 'content_type',
+			fileParamName: 'file',
+			idAttribute: 'id',
+		};
+		this.uploader = new FileUploader({
+			uploaderService: uploaderService,
+		});
+	}
 }
 
 describe('Directive: FileSelectDirective', () => {

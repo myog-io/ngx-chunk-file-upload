@@ -5,6 +5,7 @@ import { inject, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FileUploader } from '../file-upload/file-uploader.class';
 import { FileUploadModule } from '../file-upload/file-upload.module';
 import { FileDropDirective } from '../file-upload/file-drop.directive';
+import { FileUploaderService } from '../file-upload/file-uploader.service';
 
 @Component({
 	selector: 'ngx-container',
@@ -12,7 +13,31 @@ import { FileDropDirective } from '../file-upload/file-drop.directive';
 })
 export class ContainerComponent {
 	public get url(): string { return 'localhost:3000'; }
-	public uploader: FileUploader = new FileUploader({ url: this.url });
+	public uploader: FileUploader;
+	constructor(uploaderService: FileUploaderService) {
+		uploaderService.defaultLinks = {
+			downloadEntry: this.url,
+			updateEntry: this.url,
+			createEntry: this.url,
+			deleteEntry: 'this.url',
+		};
+		uploaderService.defaultOptions = {
+			createMethod: 'POST',
+			updateMethod: 'POST',
+			authorizationHeaderName: 'Authorization',
+			tokenPattern: null,
+			token: null,
+			chunkSize: 0,
+			totalChunkParamName: 'total_chunks',
+			currentChunkParamName: 'current_chunk',
+			contentTypeParamName: 'content_type',
+			fileParamName: 'file',
+			idAttribute: 'id',
+		};
+		this.uploader = new FileUploader({
+			uploaderService: uploaderService,
+		});
+	}
 }
 
 describe('Directive: FileDropDirective', () => {
@@ -81,10 +106,10 @@ describe('Directive: FileDropDirective', () => {
 	it('adds file to upload', () => {
 		spyOn(fileDropDirective.uploader, 'addToQueue');
 
-		let fileOverData;
+		let fileOverData: any;
 		fileDropDirective.fileOver.subscribe((data: any) => fileOverData = data);
 
-		let fileDropData;
+		let fileDropData: any;
 		fileDropDirective.onFileDrop.subscribe((data: File[]) => fileDropData = data);
 
 		fileDropDirective.onDrop(getFakeEventData());
@@ -138,7 +163,7 @@ function getFakeEventData(): any {
 			files: ['foo.bar'],
 			types: ['Files'],
 		},
-		preventDefault: () => undefined,
-		stopPropagation: () => undefined,
-	}
+		preventDefault: (): any => undefined,
+		stopPropagation: (): any => undefined,
+	};
 }

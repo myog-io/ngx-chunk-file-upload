@@ -11,10 +11,11 @@ module.exports = function (config) {
       require('karma-jasmine'),
       require('karma-chrome-launcher'),
       require('karma-coverage-istanbul-reporter'),
+      require('@angular-devkit/build-angular'),
       require('@angular-devkit/build-angular/plugins/karma')
     ],
     //files: [
-    //  {pattern: './scripts/test.ts', watched: false}
+    //  {pattern: './scripts/test.ts', watched: false},
     //],
     //preprocessors: {
     //  './scripts/test.ts': ['@angular-devkit/build-angular']
