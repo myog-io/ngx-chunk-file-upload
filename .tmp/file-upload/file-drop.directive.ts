@@ -5,13 +5,12 @@ import {
 	HostListener,
 	Input,
 	Output,
-	OnInit,
 } from '@angular/core';
 
 import { FileUploader, FileUploaderOptions } from './file-uploader.class';
 
 @Directive({ selector: '[ngxFileDrop]' })
-export class FileDropDirective implements OnInit {
+export class FileDropDirective {
 	@Input() public fullScreen: Boolean = true;
 	@Input() public uploader: FileUploader;
 	@Output() public fileOver: EventEmitter<any> = new EventEmitter();
@@ -33,13 +32,13 @@ export class FileDropDirective implements OnInit {
 
 	@HostListener('drop', ['$event'])
 	public onDrop(event: any): void {
-		const transfer = this._getTransfer(event);
+		let transfer = this._getTransfer(event);
 		if (!transfer) {
 			return;
 		}
 
-		const options = this.getOptions();
-		const filters = this.getFilters();
+		let options = this.getOptions();
+		let filters = this.getFilters();
 		this._preventAndStop(event);
 		this.uploader.addToQueue(transfer.files, options, filters);
 		this.fileOver.emit(false);
@@ -48,7 +47,7 @@ export class FileDropDirective implements OnInit {
 
 	@HostListener('dragover', ['$event'])
 	public onDragOver(event: DragEvent): void {
-		const transfer = this._getTransfer(event);
+		let transfer = this._getTransfer(event);
 		if (!this._haveFiles(transfer.types)) {
 			return;
 		}
@@ -102,7 +101,7 @@ export class FileDropDirective implements OnInit {
 					function (e: any) {
 						e.preventDefault();
 						this.fileOver.emit(true);
-					}.bind(this),
+					}.bind(this)
 				);
 			}
 		}

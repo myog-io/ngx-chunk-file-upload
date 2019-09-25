@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 //	FileUploaderOptions,
 //	UploaderServiceOptions,
 //	UploaderLinksOptions,
-//} from 'ngx-chunk-file-upload';
+//} from '@myog-io/ngx-chunk-file-upload';
 import {
 	FileUploaderService,
 	FileItem,

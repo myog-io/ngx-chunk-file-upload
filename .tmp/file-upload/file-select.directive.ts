@@ -34,9 +34,9 @@ export class FileSelectDirective {
 
 	@HostListener('change')
 	public onChange(): any {
-		const files = this.element.nativeElement.files;
-		const options = this.getOptions();
-		const filters = this.getFilters();
+		let files = this.element.nativeElement.files;
+		let options = this.getOptions();
+		let filters = this.getFilters();
 
 		this.uploader.addToQueue(files, options, filters);
 		this.onFileSelected.emit(files);

@@ -6,5 +6,5 @@
 
 Install the components
 ```
-npm install ngx-chunk-file-upload --save
+npm install @myog-io/ngx-chunk-file-upload --save
 ```

@@ -1,13 +1,15 @@
-import { Component } from '@angular/core';
+
 
 import { SimpleDemoService } from './simple-demo.service';
 import {
 	FileUploader, FileItem,
 } from '../../../../../src/ngx-chunk-file-upload';
+import { Component } from '@angular/core';
 
 @Component({
 	selector: 'simple-demo',
 	templateUrl: './simple-demo.html',
+	styleUrls: ['./simple-demo.scss'],
 })
 export class SimpleDemoComponent {
 

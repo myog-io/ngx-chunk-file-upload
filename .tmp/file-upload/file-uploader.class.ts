@@ -118,26 +118,26 @@ export class FileUploader {
 		options?: FileUploaderOptions,
 		filters?: FilterFunction[] | string,
 	): void {
-		const list: File[] = [];
+		let list: File[] = [];
 		for (const file of files) {
 			list.push(file);
 		}
-		const arrayOfFilters = this._getFilters(filters);
-		const count = this.queue.length;
-		const addedFileItems: FileItem[] = [];
+		let arrayOfFilters = this._getFilters(filters);
+		let count = this.queue.length;
+		let addedFileItems: FileItem[] = [];
 		list.map((some: File) => {
 			if (!options) {
 				options = this.options;
 			}
 
-			const temp = new FileLikeObject(some);
+			let temp = new FileLikeObject(some);
 			if (this._isValidFile(temp, arrayOfFilters, options)) {
-				const fileItem = new FileItem(this, some, options);
+				let fileItem = new FileItem(this, some, options);
 				addedFileItems.push(fileItem);
 				this.queue.push(fileItem);
 				this._onAfterAddingFile(fileItem);
 			} else {
-				const filter = arrayOfFilters[this._failFilterIndex];
+				let filter = arrayOfFilters[this._failFilterIndex];
 				this._onWhenAddingFileFailed(temp, filter, options);
 			}
 		});
@@ -152,8 +152,8 @@ export class FileUploader {
 	}
 
 	public removeFromQueue(value: FileItem): void {
-		const index = this.getIndexOfItem(value);
-		const item = this.queue[index];
+		let index = this.getIndexOfItem(value);
+		let item = this.queue[index];
 		if (item.isUploading) {
 			item.cancel();
 		}
@@ -170,8 +170,8 @@ export class FileUploader {
 	}
 
 	public uploadItem(value: FileItem): void {
-		const index = this.getIndexOfItem(value);
-		const item = this.queue[index];
+		let index = this.getIndexOfItem(value);
+		let item = this.queue[index];
 		item._prepareToUploading();
 		if (this.isUploading) {
 			return;
@@ -377,7 +377,7 @@ export class FileUploader {
 	): void {
 		item._onComplete(response, status, headers);
 		this.onCompleteItem(item, response, status, headers);
-		const nextItem = this.getReadyItems()[0];
+		let nextItem = this.getReadyItems()[0];
 		this.isUploading = false;
 		if (nextItem) {
 			nextItem.upload();
@@ -460,12 +460,12 @@ export class FileUploader {
 		if (this.options.removeAfterUpload) {
 			return value;
 		}
-		const notUploaded = this.getNotUploadedItems().length;
-		const uploaded = notUploaded
+		let notUploaded = this.getNotUploadedItems().length;
+		let uploaded = notUploaded
 			? this.queue.length - notUploaded
 			: this.queue.length;
-		const ratio = 100 / this.queue.length;
-		const current = (value * ratio) / 100;
+		let ratio = 100 / this.queue.length;
+		let current = (value * ratio) / 100;
 		return Math.round(uploaded * ratio + current);
 	}
 
@@ -477,7 +477,7 @@ export class FileUploader {
 			return filters;
 		}
 		if (typeof filters === 'string') {
-			const names = filters.match(/[^\s,]+/g);
+			let names = filters.match(/[^\s,]+/g);
 			return this.options.filters.filter(
 				(filter: any) => names.indexOf(filter.name) !== -1,
 			);

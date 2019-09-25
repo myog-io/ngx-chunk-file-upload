@@ -252,7 +252,7 @@ export class FileUploaderService {
 				break;
 			case HttpEventType.UploadProgress:
 				// Let's Check if user can delete the file;
-				if (event.loaded === event.total) {
+				if (event.loaded == event.total) {
 					// Checking if we have the deleteEntry Link and if the ID is null, we know we can delete the file;
 					if (!item.getId() && this.links['deleteEntry']) {
 						item.canRemove = false;

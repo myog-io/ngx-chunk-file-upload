@@ -117,7 +117,7 @@ export class FileItem {
 				},
 				(error: any) => {
 					this.isRemoving = false;
-				},
+				}
 			);
 		}, 600);
 	}
@@ -133,7 +133,7 @@ export class FileItem {
 	public onSuccess(
 		response: string,
 		status: number,
-		headers: HttpHeaders,
+		headers: HttpHeaders
 	): any {
 		return { response, status, headers };
 	}
@@ -146,14 +146,14 @@ export class FileItem {
 	public onComplete(
 		response: string,
 		status: number,
-		headers: HttpHeaders,
+		headers: HttpHeaders
 	): any {
 		return { response, status, headers };
 	}
 	public onCompleteChunk(
 		response: string,
 		status: number,
-		headers: HttpHeaders,
+		headers: HttpHeaders
 	): any {
 		return { response, status, headers };
 	}
@@ -177,7 +177,7 @@ export class FileItem {
 	public _onSuccess(
 		response: string,
 		status: number,
-		headers: HttpHeaders,
+		headers: HttpHeaders
 	): void {
 		this.isReady = false;
 		this.isUploading = false;
@@ -192,7 +192,7 @@ export class FileItem {
 	public _onError(
 		response: string,
 		status: number,
-		headers: HttpHeaders,
+		headers: HttpHeaders
 	): void {
 		this.isReady = false;
 		this.isUploading = false;
@@ -218,7 +218,7 @@ export class FileItem {
 	public _onComplete(
 		response: string,
 		status: number,
-		headers: HttpHeaders,
+		headers: HttpHeaders
 	): void {
 		this.onComplete(response, status, headers);
 
@@ -229,7 +229,7 @@ export class FileItem {
 	public _onCompleteChunk(
 		response: string,
 		status: number,
-		headers: HttpHeaders,
+		headers: HttpHeaders
 	): void {
 		this.chunkRetries = 0;
 		this._onCompleteChunkCallNext();
@@ -242,7 +242,7 @@ export class FileItem {
 	public _onErrorChunk(
 		response: string,
 		status: number,
-		headers: HttpHeaders,
+		headers: HttpHeaders
 	): void {
 		if (this.chunkRetries > this.chunkTotalRetries) {
 			this.uploader.onErrorItem(this, response, status, headers);
