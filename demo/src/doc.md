@@ -1,6 +1,6 @@
 ### Usage
 ```typescript
-import { FileSelectDirective, FileDropDirective, FileUploader } from '@myog-io/ngx-chunk-file-upload/@myog-io/ngx-chunk-file-upload';
+import { FileSelectDirective, FileDropDirective, FileUploader } from '@myog-io/ngx-chunk-file-upload';
 ```
 
 ### Annotations

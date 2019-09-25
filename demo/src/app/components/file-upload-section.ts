@@ -1,14 +1,14 @@
 import { Component } from "@angular/core";
 
-
 const doc = require('html-loader!markdown-loader!../../doc.md');
 
 const tabDesc: Array<any> = [
 	{
 		heading: 'Simple',
-		ts: require('!!raw-loader?!./file-upload/simple-demo.ts'),
-		html: require('!!raw-loader?!./file-upload/simple-demo.html'),
-		js: require('!!raw-loader?!./file-upload/file-catcher.js'),
+		ts: require('!!raw-loader!./file-upload/simple-demo.ts'),
+		service: require('!!raw-loader!./file-upload/simple-demo.service.ts'),
+		html: require('!!raw-loader!./file-upload/simple-demo.html'),
+		js: require('!!raw-loader!./file-upload/file-catcher.js'),
 	},
 ];
 
