@@ -1,8 +1,0 @@
-{
-  "name": "@myog-io/ngx-chunk-file-upload",
-  "version": "1.3.0",
-  "peerDependencies": {
-    "@angular/common": "*",
-    "@angular/core": "*"
-  }
-}
