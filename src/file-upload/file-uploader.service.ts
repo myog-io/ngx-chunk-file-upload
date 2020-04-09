@@ -69,7 +69,7 @@ export class FileUploaderService {
 
 	constructor(protected http: HttpClient) {
 	}
-	public init(links, options) {
+	public init(links: UploaderLinksOptions, options: UploaderServiceOptions) {
 		this.links = Object.assign({}, this.defaultLinks, links);
 		this.options = Object.assign({}, this.defaultOptions, options);
 	}
