@@ -29,7 +29,7 @@ npm-debug.log
 .DS_Store
 Thumbs.db
 
-
+.tmp
 /demo/e2e/*.js
 /demo/e2e/*.map
 src/**/*.js
