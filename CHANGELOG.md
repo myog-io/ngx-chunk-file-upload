@@ -1,3 +1,11 @@
+## 1.3.1 (2020-04-09)
+Added extensionParamName -> This will add on the post of the file, the file extension 
+Added bytesParamName -> This will add on the post of the file, the total file size, this could be helpfull for Chunk upload on some CDN services
+Added getFileExtension on File item to get the extension and send on the post
+Chaning how the Model initiate the this.options and this.links with a this.init() to make sure all variables are being correctly set
+
+
+
 <a name="1.3.0"></a>
 # 1.3.1 (2019-09-25)
 Changed the Project name and starting to take care of the project from the guys @valor-software

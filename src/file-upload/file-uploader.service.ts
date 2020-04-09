@@ -188,10 +188,9 @@ export class FileUploaderService {
 				(item.getCurrentChunk() + 1).toString(),
 			);
 		}
-
+		sendable.append(this.options.bytesParamName, item.file.size);
 		sendable.append(this.options.contentTypeParamName, item.getContentType());
-    	sendable.append(this.options.extensionParamName, item.getFileExtension());
-    
+		sendable.append(this.options.extensionParamName, item.getFileExtension());
 
 		if (options.parametersBeforeFiles) {
 			appendFile();
