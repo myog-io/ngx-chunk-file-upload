@@ -63,6 +63,9 @@ export class FileItem {
 		}
 		return null;
 	}
+	public getFileExtension() {
+		return this._file.name.split('.').pop();
+	}
 	public createFileChunk(chunkSize: number): void {
 		this.fileChunks = new FileChunk(this._file, { byteStepSize: chunkSize });
 	}

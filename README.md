@@ -111,13 +111,17 @@ export class SimpleDemoService extends FileUploaderService {
     tokenPattern: 'Bearer #token#',
     token: null,
     chunkSize: 1024 * 1024 * 3,
+    bytesParamName: 'bytes',
     totalChunkParamName: 'total_chunks',
     currentChunkParamName: 'current_chunk',
+    contentTypeParamName: 'content_type',
     fileParamName: 'file',
-    idAttribute: 'id',
+    extensionParamName: 'extension',
+    idAttribute: 'id'
   };
   constructor(protected http: HttpClient) {
     super(http);
+    this.init(this.links, this.options);
   }
 
   /**

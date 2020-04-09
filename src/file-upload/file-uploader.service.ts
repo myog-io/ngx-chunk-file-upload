@@ -26,9 +26,11 @@ export interface UploaderServiceOptions {
 	tokenPattern?: string;
 	token?: string;
 	chunkSize?: number;
+	bytesParamName?: string,
 	totalChunkParamName?: string;
 	currentChunkParamName?: string;
 	contentTypeParamName?: string;
+	extensionParamName?: string;
 	fileParamName?: string;
 	idAttribute?: string;
 }
@@ -49,11 +51,13 @@ export class FileUploaderService {
 		tokenPattern: null,
 		token: null,
 		chunkSize: 0,
+		bytesParamName: 'bytes',
 		totalChunkParamName: 'total_chunks',
 		currentChunkParamName: 'current_chunk',
 		contentTypeParamName: 'content_type',
 		fileParamName: 'file',
-		idAttribute: 'id',
+		extensionParamName: 'extension',
+		idAttribute: 'id'
 	};
 
 	public additionalHeaders: any = {};
@@ -64,8 +68,10 @@ export class FileUploaderService {
 	private _uploader: FileUploader = null;
 
 	constructor(protected http: HttpClient) {
-		this.links = Object.assign({}, this.defaultLinks, this.links);
-		this.options = Object.assign({}, this.defaultOptions, this.options);
+	}
+	public init(links, options) {
+		this.links = Object.assign({}, this.defaultLinks, links);
+		this.options = Object.assign({}, this.defaultOptions, options);
 	}
 	get uploader(): FileUploader {
 		return this._uploader;
@@ -184,6 +190,8 @@ export class FileUploaderService {
 		}
 
 		sendable.append(this.options.contentTypeParamName, item.getContentType());
+    	sendable.append(this.options.extensionParamName, item.getFileExtension());
+    
 
 		if (options.parametersBeforeFiles) {
 			appendFile();
